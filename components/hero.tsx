@@ -104,12 +104,6 @@ export function Hero() {
           <ChevronDown className="w-6 h-6 text-white/40 animate-bounce-slow" />
         </div>
       </div>
-
-      {/* Corner Markers */}
-      <div className="absolute bottom-8 left-8 z-20 hidden lg:flex items-end gap-2">
-        <div className="w-8 h-px bg-[#ff3131]" />
-        <span className="text-white/30 text-xs font-mono">01</span>
-      </div>
     </section>
   )
 }
