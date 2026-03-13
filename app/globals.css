@@ -1,0 +1,321 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #f0f0f0;
+  --card: rgba(255,255,255,0.02);
+  --card-foreground: #f0f0f0;
+  --popover: #0a0a0a;
+  --popover-foreground: #f0f0f0;
+  --primary: #ff3131;
+  --primary-foreground: #0a0a0a;
+  --secondary: rgba(255,255,255,0.03);
+  --secondary-foreground: #f0f0f0;
+  --muted: #666666;
+  --muted-foreground: #666666;
+  --accent: #ff3131;
+  --accent-foreground: #0a0a0a;
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: rgba(255,255,255,0.08);
+  --input: rgba(255,255,255,0.06);
+  --ring: rgba(255,49,49,0.5);
+  --chart-1: #ff3131;
+  --chart-2: #ff5555;
+  --chart-3: #666666;
+  --chart-4: #f0f0f0;
+  --chart-5: rgba(255,49,49,0.5);
+  --radius: 0rem;
+  --red: #ff3131;
+  --red-dark: #cc0000;
+  --off-white: #f0f0f0;
+  --surface: rgba(255,255,255,0.02);
+  --text-muted: #666666;
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), 'Inter', system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-red: var(--red);
+  --color-red-dark: var(--red-dark);
+  --color-off-white: var(--off-white);
+  --color-surface: var(--surface);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-[#0a0a0a] text-[#f0f0f0];
+    overflow-x: hidden;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  .snap-section {
+    min-height: 100vh;
+    position: relative;
+  }
+}
+
+/* Custom Animations */
+@keyframes heroTitle {
+  from { 
+    opacity: 0; 
+    transform: translateY(80px) rotateX(-30deg); 
+    filter: blur(10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0) rotateX(0); 
+    filter: blur(0); 
+  }
+}
+
+@keyframes fadeUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(40px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes gradientSlide {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+/* Animation Classes */
+.animate-hero-title {
+  animation: heroTitle 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.8s ease 0.9s both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease both;
+}
+
+.animate-gradient {
+  background: linear-gradient(90deg, #ff3131, #ffffff, #ff3131, #cc0000);
+  background-size: 300% 100%;
+  animation: gradientSlide 6s ease infinite alternate;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.animate-bounce-slow {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+/* Reveal Animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Scroll margin for fixed header */
+section[id] {
+  scroll-margin-top: 100px;
+}
+
+/* Glass Effect */
+.glass {
+  background: rgba(8, 8, 8, 0.65);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.glass-scrolled {
+  background: rgba(8, 8, 8, 0.85);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Font display class */
+.font-display {
+  font-family: var(--font-space-grotesk), 'Space Grotesk', system-ui, sans-serif;
+}
+
+/* Streetwear / Pixo Effects */
+.pixo-text {
+  text-shadow: 
+    3px 3px 0 #ff3131,
+    -1px -1px 0 #ff3131,
+    1px -1px 0 #ff3131,
+    -1px 1px 0 #ff3131;
+  letter-spacing: -0.05em;
+}
+
+.glitch-text {
+  position: relative;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch-text::before {
+  color: #ff3131;
+  animation: glitch-1 0.3s infinite linear alternate-reverse;
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+}
+
+.glitch-text::after {
+  color: #00ffff;
+  animation: glitch-2 0.3s infinite linear alternate-reverse;
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+}
+
+@keyframes glitch-1 {
+  0% { transform: translate(0); }
+  20% { transform: translate(-3px, 3px); }
+  40% { transform: translate(-3px, -3px); }
+  60% { transform: translate(3px, 3px); }
+  80% { transform: translate(3px, -3px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes glitch-2 {
+  0% { transform: translate(0); }
+  20% { transform: translate(3px, -3px); }
+  40% { transform: translate(3px, 3px); }
+  60% { transform: translate(-3px, -3px); }
+  80% { transform: translate(-3px, 3px); }
+  100% { transform: translate(0); }
+}
+
+/* Noise/Grain Overlay */
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Reveal on Scroll - Streetwear Style */
+.reveal-street {
+  opacity: 0;
+  transform: translateY(60px) skewY(2deg);
+  transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-street.is-visible {
+  opacity: 1;
+  transform: translateY(0) skewY(0);
+}
+
+/* Stripe Pattern */
+.stripe-bg {
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 10px,
+    rgba(255, 49, 49, 0.03) 10px,
+    rgba(255, 49, 49, 0.03) 20px
+  );
+}
+
+/* Brutal Border */
+.brutal-border {
+  border: 3px solid #f0f0f0;
+  box-shadow: 5px 5px 0 #ff3131;
+}
+
+/* Tape Effect */
+.tape-effect {
+  position: relative;
+}
+
+.tape-effect::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 80px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.15);
+  z-index: 10;
+}
+
+/* Marker Highlight */
+.marker-highlight {
+  background: linear-gradient(180deg, transparent 60%, rgba(255, 49, 49, 0.3) 60%);
+  padding: 0 4px;
+}
+
+/* Sticker Style */
+.sticker {
+  background: #ff3131;
+  color: #0a0a0a;
+  padding: 4px 12px;
+  transform: rotate(-3deg);
+  display: inline-block;
+  font-weight: 800;
+  text-transform: uppercase;
+}
